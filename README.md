@@ -1,9 +1,9 @@
 # TestingWithXcodeDocsCN
 
 
--> ![](https://eapnaq.blu.livefilestore.com/y2p1PJW0P1iadSL_AUlwZ91fqNIZlO2Ir96iLIyJGVOTi53oe3hwCFBtLkUps7waeRO1IKgAz6N6bJ6DxsSzvAFMMKEOEMDDwsYn6IVuvhqNzQ/cocoachina.png?psid=1) <-
+> ![](https://eapnaq.blu.livefilestore.com/y2p1PJW0P1iadSL_AUlwZ91fqNIZlO2Ir96iLIyJGVOTi53oe3hwCFBtLkUps7waeRO1IKgAz6N6bJ6DxsSzvAFMMKEOEMDDwsYn6IVuvhqNzQ/cocoachina.png?psid=1)
 
--> **CocoaChina翻译小组** <-
+> **CocoaChina翻译小组**
 
 ======================
 
