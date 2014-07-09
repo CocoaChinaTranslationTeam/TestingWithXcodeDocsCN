@@ -76,4 +76,158 @@
 每一个类，测试开始于setup方法。每一个方法，一个新的类实例被创建，他的setup方法执行。在跑完了测试方法之后，实例卸载方法。类中这样连续重复执行所有测试方法。在最后的测试方法卸载后，Xcode执行类卸载方法，然后开始下一个类。这种序列一直重复直到所有的类的所有测试方法跑完。
 
 
+##编写测试方法
+你通过测试方法把测试写到测试类中，一个测试方法是_test_开发头的测试类的实例方法，没有参数，返回`void`，比如`testColorIsRed`.测试方法调用工程中的代码，如果得不到预期的结果会用一系列的断言API报错。比如，
+一个函数返回值可能与预期值相比不同，或者你的测试方法使用了某个类里不合适的方法都将会抛出异常。[ “XCTest Assertions”](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/testing_3_writing_test_classes/testing_3_writing_test_classes.html#//apple_ref/doc/uid/TP40014132-CH4-SW34)描述了这些情况。
+
+为了测试方法正常的访问，引入正确的头文件到测试类中很重要。
+
+当Xcode运行测试，它调用的每个测试方法都是独立的。因此每个方法需要准备和清理干净附注的变量、结构和对象等，他们会和子类的API相互影响。如果类中所有测试方法的代码是相同的，你可以直接加到`setUp`和`tearDown`的实例方法中，详见[ “Test Class Structure.”](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/testing_3_writing_test_classes/testing_3_writing_test_classes.html#//apple_ref/doc/uid/TP40014132-CH4-SW2)
+
+下面是个测试方法的模型:
+
+     - (void)testColorIsRed {
+        ...     // Set up, call test subject API. (Code could be shared in setUp method.)
+        ...     // Test logic and values, assertions report pass/fail to testing framework.
+        ...     // Tear down. (Code could be shared in tearDown method.
+     }
+
+
+
+这里有一个简单的测试方法例子，检查`CalcView`实例是否成功的为SampleCalc创建，详见[ “Quick Start” ](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/testing_1_quick_start/testing_1_quick_start.html#//apple_ref/doc/uid/TP40014132-CH2-SW1)章节：
+
+
+
+    - (void) testCalcView {
+       // setup
+       app = [NSApplication sharedApplication];
+       calcViewController = (CalcViewController*)[NSApplication sharedApplication] delegate];
+       calcView             = calcViewController.view;
+     
+       XCTAssertNotNil(calcView, @"Cannot find CalcView instance");
+       // no teardown needed
+    }    
+    For further examples of test methods implemented in a project, see the Testing Apps and Frameworkssample code project.
+
+
+进一步的例子可以在_Testing Apps and Frameworkssample_工程中找到代码
+
+
+##XCTest断言
+
+测试方法使用的断言呈现在Xcode的测试结果中，由XCTest框架提供。所有的断言有一个相似的格式:项目比较或逻辑表达式，一个失败结果格式的字符串，和插入到字符串中的参数。
+
+
+    注意：所有断言的最后一个参数是`format...`，格式字符串和变量参数列表。XCTest提供了默认的失败结果字符串，可以将参数传递到断言里。`format`字符串提供了可选的额外的失败说明，那样就可以进一步的选择提供的描述。这个参数是可选的，所以可以完全忽略。
+    
+    
+比如，[Quick Start](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/testing_1_quick_start/testing_1_quick_start.html#//apple_ref/doc/uid/TP40014132-CH2-SW1)里`testAddition`方法中的断言：
+
+     XCTAssertEqualObjects([calcViewController.displayField stringValue], @"10", @"Part 2 failed.");
+
+阅读这段语句，是说：“指出一个错误，当字符串根据视图控制器展示区域创建，不同于参数值‘8’”。如果有失败断言，Xcode在测试导航发出失败信号，然后Xcode会在问题导航、资源编辑器和其他地方标出失败描述。下面是自愿编辑器中典型的断言结果：
+
+![](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/art/twx-test_failure_assert_result_2x.png)
+
+测试类可以包含多个断言，如果任何断言包括失败报告Xcode都发出的测试失败信号。
+
+断言分为五种类型：无条件失败，相等测试，为空测试，布尔测试，和异常测试。
+
+##用类别区分断言
+
+下面的区域列出了XCTest断言。你可以使用`XCTestAssertions.h`来包含更多信息在XCTest断言里面。
+
+###非条件失败
+__XCTFail__.生成一个无条件的失败。
+
+     XCTFail(format...)
+
+
+###相等测试
+__XCTAssertEqualObjects__.当_expression1_不等于_expression2_将产生失败（或者一个对象为空，另一个不为空）。
+
+     XCTAssertEqualObjects(expression1, expression2, format...)
+
+__XCTAssertNotEqualObjects__. 当_expression1_等于_expression2_将产生失败
+
+     XCTAssertNotEqualObjects(expression1, expression2, format...)
+
+
+__XCTAssertEqual__. 当_expression1_不等于_expression2_将产生失败，这个测试用于C语言的标量。
+
+     XCTAssertEqual(expression1, expression2, format...)
+
+__XCTAssertNotEqual__.  当_expression1_等于_expression2_将产生失败，这个测试用于C语言的标量。
+
+     XCTAssertNotEqual(expression1, expression2, format...)
+
+
+__XCTAssertEqualWithAccuracy__. 当_expression1_不同于_expression2_的部分高于 _精度_ 将产生失败。这种标量用于floats和doubles这些有细微不同但能保证结果基本相等的地方，但是对所有的标量都有效。
+
+     XCTAssertEqualWithAccuracy(expression1, expression2, accuracy, format...)
+
+__XCTAssertNotEqualWithAccuracy__. 当_expression1_不同于_expression2_的部分低于 _精度_ 将产生失败。这种标量用于floats和doubles这些有细微不同但能保证结果基本相等的地方，但是对所有的标量都有效。
+
+
+     XCTAssertNotEqualWithAccuracy(expression1, expression2, accuracy, format...)
+
+
+###nil(空)测试
+
+__XCTAssertNil__.  当_expression_参数不为空产生错误。
+
+    XCTAssertNil(expression, format...)
+
+__XCTAssertNotNil__. 当_expression_参数不为空产生错误。
+
+    XCTAssertNotNil(expression, format...)
+    
+    
+###布尔测试
+
+
+__XCTAssertTrue__. 当_expression_计算为_false_产生错误。
+
+    XCTAssertTrue(expression, format...)
+
+__XCTAssert__. 当_expression_计算为_false_产生错误，与_XCTAssertTrue_相同。
+
+     XCTAssert(expression, format...)
+     
+
+__XCTAssertFalse__.  当_expression_计算为_true_产生错误。
+
+     XCTAssertFalse(expression, format...)
+
+
+###异常测试
+
+__XCTAssertThrows__.当_expression_不抛出异常产生错误。
+
+     XCTAssertThrows(expression, format...)
+     
+__XCTAssertThrowsSpecific__.当指定的类的_expression_不抛出异常产生错误。
+
+     XCTAssertThrowsSpecific(expression, exception_class, format...)
+
+__XCTAssertThrowsSpecificNamed__. 当_expression_指定的类中指定的名字不抛出异常产生错误。对于AppKit框架或基础框架非常有用，可以用通用的`NSException`抛出指定名字的异常(NSInvalidArgumentException 等)。
+
+    XCTAssertThrowsSpecificNamed(expression, exception_class, exception_name, format...)
+
+
+__XCTAssertNoThrow__. 当_expression_抛出异常产生错误。
+
+     XCTAssertNoThrow(expression, format...)
+
+
+__XCTAssertNoThrowSpecific__. 当指定的类的_expression_抛出异常则产生错误。任意其他的异常都可以；就说，他不产生失败。
+
+    XCTAssertNoThrowSpecific(expression, exception_class, format...)
+
+
+__XCTAssertNoThrowSpecificNamed__. 当_expression_指定的类中指定的名字抛出异常则产生错误。对于AppKit框架或基础框架非常有用，可以用通用的`NSException`抛出指定名字的异常(NSInvalidArgumentException 等)。
+
+
+     XCTAssertNoThrowSpecificNamed(expression, exception_class, exception_name, format...)
+
 
