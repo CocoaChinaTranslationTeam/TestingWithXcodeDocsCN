@@ -12,19 +12,19 @@
 上面的测试导航展示了一个样板工程中的测试包、类和方法的分级表。这个工程是一个计算器应用。计算器引擎实现为一个框架包。你可以`SampleCalcTests`测试包的分级的顶部看到应用中的测试代码。
 
          Note:Xcode的目标生成产品。Xcode的测试目标生成测试包并展示在测试导航栏中。
-    如果你的测试使用存储数据文件、图片，和其他的类型，则可以添加到测试包中使用`NSBundle`的API在运行时访问。使用`+[NSBundle bundleForClass:]`来保证测试类从包中取得正确的数据。更多的信息可见[ NSBundle Class Reference](https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSBundle_Class/Reference/Reference.html#//apple_ref/doc/uid/TP40003624)。
+    如果你的测试使用存储数据文件、图片，和其他的类型，则可以把它们添加到测试包中，并使用`NSBundle`的API在运行时访问。和测试类一同使用`+[NSBundle bundleForClass:]`来保证测试类从包中取得正确的数据。更多的信息可见[ NSBundle Class Reference](https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSBundle_Class/Reference/Reference.html#//apple_ref/doc/uid/TP40003624)。
 
-        Xcode框架控制那些东西来编译。同样的，还控制哪些可用的测试方法来执行测试操作。可以在控制导航列表里通过快捷菜单来启动或关闭测试包、类和方法。
+        Xcodeschemes 控制那些编译的内容。Schemes也可以控制可用的测试方法来执行测试操作。你可以在测试导航面板列表中通过Control+单击项目来启动或关闭测试包、类和方法，或者从快捷菜单中启用或者关闭测试，也可以在scheme中启用或者关闭测试。
         
         
         
-此视图中的动态测试包是`SampleCalcTests`。`SampleCalcTests`包括了一个测试类，总共有9个测试方法。 当你按住表中任何一个项目的箭头，运行按钮![](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/art/twx-test_navigator_run_button_2x.png) 会展示了右边的项目名。这是比较快捷的方式运行包里所有的测试或者独立的测试。测试返回通过或失败结果给Xcode。当测试被执行，标识会根据结果更新，绿色的复选标记是通过，红色为失败。在下面的图的导航里，两个测试被判定为失败。
+此视图中的激活的测试包是`SampleCalcTests`。`SampleCalcTests`包括了一个测试类，总共有9个测试方法。 当你按住表中任何一个项目的箭头，运行按钮![](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/art/twx-test_navigator_run_button_2x.png) 会展示了右边的项目名。这是比较快捷的方式运行包里所有的测试或者任何独立的测试。测试返回通过或失败结果给Xcode。当测试被执行，标识会更新从而向你展示结果，绿色的对勾标记是通过，红色的X为失败。在下面的测试导航面板中，两个测试被判定为失败。
 ![](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/art/twx-test_nav-indicators_2x.png)  
 
 
-点击列表中的任意测试类或测试方法都会在资源编辑器中打开测试类。测试类和方法标记在资源编辑器中和标记放在一起，和测试导航中的工作方式相同。测试失败展示在源代码编辑器的相关部分。
+点击列表中的任意测试类或测试方法都会在源码编辑器中打开测试类。测试类和方法标记在源码编辑器的侧栏中，和标记放在一起，和在测试导航面板中的工作方式相同。测试失败在源码编辑器中相关的断言处展示结果字符串。
 
-测试导航底部的添加按钮 (+) 作为过滤控制。你可以缩减视图，只测试动态框架，或者只看失败的测试。
+测试导航面板底部是添加按钮 (+) ，还有一个过滤控制器。你可以缩小范围，比如只在活跃的scheme中测试或者只测试失败的测试，也可以通过名称筛选测试。。
 
 更多测试导航的详细信息可见[Test Navigator Help](https://developer.apple.com/library/mac/recipes/xcode_help-test_navigator/_index.html#//apple_ref/doc/uid/TP40013329)。
 
@@ -32,11 +32,11 @@
 
 ##给你的应用添加测试
 
-在Xcode5中创建新的应用和框架/库类会预配置一个测试目标。当你开始打开新工程，在测试导航可以看到一个测试包、一个测试类和一个测试方法的模板。但是如果打开一个比较老的版本的Xcode的工程就不会有测试目标了。下面的工作流程展示了一个假定没有集成测试目标的工程。
+在Xcode5中创建新的应用和框架/库类会预配置一个测试目标。当你开始打开新工程，在测试导航面板上可以看到一个测试包、一个测试类和一个测试方法的模板。但是如果打开一个比较老的版本的Xcode的工程就不会有测试目标了。下面的工作流程展示了一个假定没有集成测试目标的工程。
 
 
 ###创建测试目标
-打开测试目标，点击左下角的（+）按钮，选择添加新的目标
+打开测试目标，点击左下角的（+）按钮，从菜单中选择New Test Target。
 ![](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/art/twx-add_testing_01_2x.png)
 
 在新目标中，编辑产品名和其他的参数。
