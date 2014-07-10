@@ -19,14 +19,15 @@ Xcode schemes 控制那些编译的内容。Schemes也可以控制可用的测�
         
      
 此视图中的激活的测试包是`SampleCalcTests`。`SampleCalcTests`包括了一个测试类，总共有9个测试方法。 当你按住表中任何一个项目的箭头，运行按钮![](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/art/twx-test_navigator_run_button_2x.png) 会展示了右边的项目名。这是比较快捷的方式运行包里所有的测试或者任何独立的测试。测试返回通过或失败结果给Xcode。当测试被执行，标识会更新从而向你展示结果，绿色的对勾标记是通过，红色的X为失败。在下面的测试导航面板中，两个测试被判定为失败。
+
 ![](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/art/twx-test_nav-indicators_2x.png)  
 
 
 点击列表中的任意测试类或测试方法都会在源码编辑器中打开测试类。测试类和方法标记在源码编辑器的侧栏中，和标记放在一起，和在测试导航面板中的工作方式相同。测试失败在源码编辑器中相关的断言处展示结果字符串。
 
-测试导航面板底部是添加按钮 (+) ，还有一个过滤控制器。你可以缩小范围，比如只在活跃的scheme中测试或者只测试失败的测试，也可以通过名称筛选测试。。
+测试导航面板底部是添加按钮 (+) ，还有一个过滤控制器。你可以缩小范围，比如只在活跃的scheme中测试或者只测试失败的测试，也可以通过名称筛选测试。
 
-更多测试导航的详细信息可见[Test Navigator Help](https://developer.apple.com/library/mac/recipes/xcode_help-test_navigator/_index.html#//apple_ref/doc/uid/TP40013329)。
+更多测试导航的详细信息可见![Test Navigator Help](https://developer.apple.com/library/mac/recipes/xcode_help-test_navigator/_index.html#//apple_ref/doc/uid/TP40013329)。
 
 
 
