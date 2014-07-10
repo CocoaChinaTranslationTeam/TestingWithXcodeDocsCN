@@ -12,7 +12,8 @@
 上面的测试导航展示了一个样板工程中的测试包、类和方法的分级表。这个工程是一个计算器应用。计算器引擎实现为一个框架包。你可以`SampleCalcTests`测试包的分级的顶部看到应用中的测试代码。
 
 Note:Xcode的目标生成产品。Xcode的测试目标生成测试包并展示在测试导航栏中。
-如果你的测试使用存储数据文件、图片，和其他的类型，则可以把它们添加到测试包中，并使用`NSBundle`的API在运行时访问。和测试类一同使用`+[NSBundle bundleForClass:]`来保证测试类从包中取得正确的数据。更多的信息可见![ NSBundle Class Reference](https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSBundle_Class/Reference/Reference.html#//apple_ref/doc/uid/TP40003624).
+
+如果你的测试使用存储数据文件、图片，和其他的类型，则可以把它们添加到测试包中，并使用`NSBundle`的API在运行时访问。和测试类一同使用`+[NSBundle bundleForClass:]`来保证测试类从包中取得正确的数据。更多的信息可见[NSBundle Class Reference](https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSBundle_Class/Reference/Reference.html#//apple_ref/doc/uid/TP40003624).
 
 Xcode schemes 控制那些编译的内容。Schemes也可以控制可用的测试方法来执行测试操作。你可以在测试导航面板列表中通过Control+单击项目来启动或关闭测试包、类和方法，或者从快捷菜单中启用或者关闭测试，也可以在scheme中启用或者关闭测试。
         
@@ -29,7 +30,7 @@ Xcode schemes 控制那些编译的内容。Schemes也可以控制可用的测�
 
 测试导航面板底部是添加按钮 (+) ，还有一个过滤控制器。你可以缩小范围，比如只在活跃的scheme中测试或者只测试失败的测试，也可以通过名称筛选测试。
 
-更多测试导航详细信息可见![Test Navigator Help](https://developer.apple.com/library/mac/recipes/xcode_help-test_navigator/_index.html#//apple_ref/doc/uid/TP40013329)。
+更多测试导航详细信息可见[Test Navigator Help](https://developer.apple.com/library/mac/recipes/xcode_help-test_navigator/_index.html#//apple_ref/doc/uid/TP40013329)。
 
 
 
