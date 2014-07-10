@@ -66,21 +66,23 @@
     }
     @end
 
-测试类用Objective-C实现。注意实现包含了setup和teardown的基本实例方法；这些方法是必须的。如果类中所有的测试方法都需要相同的代码，你可以定制setUp和tearDown来包含这些代码。你添加的代码在每一个测试方法的之前和之后执行。你可以有选择性的添加定制的设置(+ (void)setUp) 和卸载 teardown (+ (void)tearDown) 方法，他们在类里所有测试方法的之前和之后执行。
+测试类用Objective-C实现。注意实现里包含了方法，比如setup和teardown的基本实例方法；这些方法是必须的。如果类中所有的测试方法都需要相同的代码，你可以定制setUp和tearDown来包含这些代码。你添加的代码在每一个测试方法的之前和之后执行。你可以有选择性的添加定制的设置(+ (void)setUp) 和卸载 teardown (+ (void)tearDown) 方法，他们在类里所有测试方法的之前和之后执行。
+
+Xcode执行测试可以明确这些方法的使用，这正是我们接下来的内容要讨论的
 
 ##测试执行的流程
-当测试执行，XCTest找到所有继承于`XCTestCase`的类，为每一个类运行他们的测试方法。
+在执行测试的过程中，XCTest找到所有继承于`XCTestCase`（它是测试类）的类，为每一个类运行它们的测试方法。
 
-每一个类，测试开始于setup方法。每一个方法，一个新的类实例被创建，他的setup方法执行。在跑完了测试方法之后，实例卸载方法。类中这样连续重复执行所有测试方法。在最后的测试方法卸载后，Xcode执行类卸载方法，然后开始下一个类。这种序列一直重复直到所有的类的所有测试方法跑完。
+对于每个类来说，测试开始于运行类setup方法。对于每个测试方法来说，一个新的类实例被创建，它的实例setup方法就会执行。在跑完了测试方法之后，实例卸载方法。类中这样连续重复执行所有测试方法。在运行的类卸载了最后的测试方法后，Xcode悔执行类卸载方法，并开始下一个类。这种序列一直重复直到跑完所有测试类的所有测试方法。
 
 
 ##编写测试方法
-你通过测试方法把测试写到测试类中，一个测试方法是_test_开发头的测试类的实例方法，没有参数，返回`void`，比如`testColorIsRed`.测试方法调用工程中的代码，如果得不到预期的结果会用一系列的断言API报错。比如，
-一个函数返回值可能与预期值相比不同，或者你的测试方法使用了某个类里不合适的方法都将会抛出异常。[ “XCTest Assertions”](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/testing_3_writing_test_classes/testing_3_writing_test_classes.html#//apple_ref/doc/uid/TP40014132-CH4-SW34)描述了这些情况。
+你通过编写测试方法把测试写到测试类中，一个测试方法是以_test_开头的测试类的实例方法，没有参数，返回`void`，比如`testColorIsRed`.测试方法调用工程中的代码，如果代码没有产生预期的结果，那么会用一系列的断言API报错。比如，
+一个函数返回值可能与预期值相比不同，或者你的测试方法使用了某个类里不适当的方法都将会抛出异常。[ “XCTest Assertions”](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/testing_3_writing_test_classes/testing_3_writing_test_classes.html#//apple_ref/doc/uid/TP40014132-CH4-SW34)描述了这些情况。
 
-为了测试方法正常的访问，引入正确的头文件到测试类中很重要。
+为了测试方法正常访问即将被测试的代码，引入正确的头文件到测试类中很重要。
 
-当Xcode运行测试，它调用的每个测试方法都是独立的。因此每个方法需要准备和清理干净附注的变量、结构和对象等，他们会和子类的API相互影响。如果类中所有测试方法的代码是相同的，你可以直接加到`setUp`和`tearDown`的实例方法中，详见[ “Test Class Structure.”](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/testing_3_writing_test_classes/testing_3_writing_test_classes.html#//apple_ref/doc/uid/TP40014132-CH4-SW2)
+当Xcode运行测试时，它调用的每个测试方法都是独立的。因此每个方法需要准备和清理辅助变量、结构以及与主题API进行交互的对象等。如果类中所有测试方法的代码是相同的，你可以直接把它添加到必需的`setUp`和`tearDown`的实例方法中，详见[ “Test Class Structure.”](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/testing_3_writing_test_classes/testing_3_writing_test_classes.html#//apple_ref/doc/uid/TP40014132-CH4-SW2)
 
 下面是个测试方法的模型:
 
@@ -92,7 +94,7 @@
 
 
 
-这里有一个简单的测试方法例子，检查`CalcView`实例是否成功的为SampleCalc创建，详见[ “Quick Start” ](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/testing_1_quick_start/testing_1_quick_start.html#//apple_ref/doc/uid/TP40014132-CH2-SW1)章节：
+这里有一个简单的测试方法例子，检查是否成功地为SampleCalc创建了`CalcView`实例，详见[ “Quick Start” ](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/testing_1_quick_start/testing_1_quick_start.html#//apple_ref/doc/uid/TP40014132-CH2-SW1)章节：
 
 
 
@@ -108,7 +110,7 @@
     For further examples of test methods implemented in a project, see the Testing Apps and Frameworkssample code project.
 
 
-进一步的例子可以在_Testing Apps and Frameworkssample_工程中找到代码
+更深一点的例子可以在_Testing Apps and Frameworkssample_工程中找到代码
 
 
 ##XCTest断言
