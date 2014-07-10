@@ -1,40 +1,38 @@
 #编写测试类与方法
-当你添加一个有测试导航的测试目标到工程里，Xcode会在测试导航里展示出测试类与方法。在测试目标里是包含测试方法的测试类。本章节讲述怎样创建测试类和编写测试方法。
+当你使用测试导航面板往项目中添加测试目标时，Xcode会在测试导航面板里展示出测试类与方法。在测试目标里是包含测试方法的测试类。本章节讲述怎样创建测试类和编写测试方法。
 
 
 ##测试目标，测试包，测试导航
-在学习创建测试类前，有必要看看测试导航。它的核心是创建和运行测试工作。
+在学习创建测试类前，有必要看看测试导航面板。它对创建和运行测试工作极为重要。
 
-测试导航罗列了测试包里所有的组建，在一个有层次的列表里展示出测试类和测试方法。下面是一个工程的测试导航试图，包含了多个测试目标，展示了测试包、类与方法的嵌套层级。
+测试导航面板罗列了测试包里的所有组件内容，并在一个层次列表里展示出测试类和测试方法。下面是一个工程的测试导航面板视图，包含了多个测试目标，展示了测试包、测试类以及测试方法的嵌套层级。
 
 ![](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/art/twx-testnav-bundle_hierarchy_2x.png)
 
-测试包里包含多个测试类，可以把测试类分为多个关联或功能组群。比如，计算器示例工程创建了`BasicFunctionsTests`, `AdvancedFunctionsTests`, 和 `DisplayTests classes`三个类，但他们都属于`Mac_Calc_Tests`测试包。
+测试包可包含多个测试类。你可以使用测试类把测试分到相关的组群中，或者按照功能分，或者按照组织目的分。比如，对于本章中的计算器示例工程，你可以创建`BasicFunctionsTests`, `AdvancedFunctionsTests`以及 `DisplayTests classes`三个类，但他们都属于`Mac_Calc_Tests`测试包。
 
 ![](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/art/twx-testnav-three_test_classes_2x.png)
 
-一些测试类型可能会共享某些类型的安装和卸载需求，这样的话把这些测试整合到类里面会更加合理，可以最小化减少每一个测试方法的代码。
+一些测试类型可能会共享某些类型的安装和卸载需求，把这些测试整合到类里面会更加合理，这样可以最小化每个测试方法所需编写的代码。
 
 ##创建测试类
-点击加号按钮（+），点击测试导航的添加新测试类选项可以创建新测试类。
+可以使用加号按钮（+）和测试导航面板中的“New Test Class”命令创建新测试类。 
+
 ![](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/art/twx-testnav-new_test_class_2x.png)
 
-每一个测试类都添加到工程中的 _TestClassName.m_ 文件，名字基于你在配置菜单中键入的测试类名。
+基于你在配置页面键入的测试类名，你添加的每个类都会使得一个名为TestClassName.m的文件被添加到项目中。
 
 ![](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/art/twx-test_class_config_sheet_2x.png)
 
+>注意：所有测试类都是`XCTest`框架`XCTestCase`类的子类。
 
-
-    注意：所有的测试类都是`XCTestCase`的子类，由`XCTest`框架提供。
-
-尽管Xcode会默认的把测试类添加到为工程的测试目标创建的组中，你还是可以自己选择要组织的文件。按下图标准的Xcode添加文件方式：
+尽管Xcode会默认的把测试类添加到为工程测试目标所创建的组中，你还是可以在项目中组织自己选择的文件。当你按下Next按钮，标准的Xcode添加文件页面如下所示：
 
 ![](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/art/twx-file_handling_sheet_2x.png)
 
+你可以用相同的方法在工程导航面板中添加文件。具体使用方法详见[Adding an Existing File or Folder](https://developer.apple.com/library/mac/recipes/xcode_help-structure_navigator/articles/Adding_an_Existing_File_or_Folder.html#//apple_ref/doc/uid/TP40009934-CH17)
 
-你可以用相同的方法在工程导航中添加文件。具体的使用方法详见[添加已存在的文件或文件夹](https://developer.apple.com/library/mac/recipes/xcode_help-structure_navigator/articles/Adding_an_Existing_File_or_Folder.html#//apple_ref/doc/uid/TP40009934-CH17)
-
-    注意：当你创建Xcode5或更搞版本的工程，一个测试目标和相关的测试包都会默认的被创建，名字根据工程名获得。比如创建的工程名叫`MyApp`，自动生成的包名会叫`MyAppTests`，测试类命叫做`MyAppTests`,关联在`MyAppTests.m`实例文件中。
+>注意：当你用Xcode5及以上版本创建工程时，一个测试目标和相关的测试包都会默认的被创建，名字根据工程名获得。比如创建名为`MyApp`的项目，则会自动生成名为`MyAppTests`的测试包，以及一个名为`MyAppTests`的测试类,关联在`MyAppTests.m`实例文件中。
 
 ##测试类的结构
 测试类包含如下的基本结构
