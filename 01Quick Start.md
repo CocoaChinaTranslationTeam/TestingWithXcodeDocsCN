@@ -36,34 +36,34 @@ Xcode schemes 控制那些编译的内容。Schemes也可以控制可用的测�
 
 ##给你的应用添加测试
 
-在Xcode5中创建新的应用和框架/库类会预配置一个测试目标。当你开始打开新工程，在测试导航面板上可以看到一个测试包、一个测试类和一个测试方法的模板。但是如果打开一个比较老的版本的Xcode的工程就不会有测试目标了。下面的工作流程展示了一个假定没有集成测试目标的工程。
+在Xcode5中创建新的应用和框架/库类会预配置一个测试目标。当你打开新工程，在测试导航面板上可以看到一个测试包、一个测试类和一个测试方法的模板。但是如果打开一个比较老的版本的Xcode的工程就不会有测试目标了。下面的工作流程展示了一个假定没有集成测试目标的工程。
 
 
 ###创建测试目标
 打开测试目标，点击左下角的（+）按钮，从菜单中选择New Test Target。
 ![](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/art/twx-add_testing_01_2x.png)
 
-在新目标中，编辑产品名和其他的参数。
+根据你的设置偏好和需求，在新目标助手中编辑Product Name和其他参数。
 
 ![](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/art/twx-add_testing_02_2x.png)
 
-点击完成按钮添加目标，可见导航视图里包含了模板测试类和一个测试方法。
+点击完成按钮来添加目标，测试导航面板中包含了模板测试类和一个测试方法。
 ![](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/art/twx-add_testing_03_2x.png)
 
-###运行测试和查看结果
-现在把测试加到了工程中，你可以开发了。但是在测试导航把鼠标悬停在`SampleCalcTests`测试类上然后点击运行按钮来运行所有的测试方法，一个错误被抛了出来。点击`testExample`方法可以看到下面图中的测试结果，源代码和高亮的错误原因:
+###运行测试并查看结果
+现在你已经把测试加到了工程中，你会想要运行这些测试来做一些有用的事。但首先要在测试导航面板中把鼠标悬停在`SampleCalcTests`测试类上并点击运行按钮来运行所有的测试方法，在测试导航面板中抛出了一个错误来。点击`testExample`方法可以看到下面图中的测试结果、源代码和高亮的错误情况:
 
 ![](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/art/twx-add_testing_04_2x.png)
 
 
 
-测试失败了因为测试的模板类包含了一个默认的测试方法`XCTFail()`，一个强制判为失败的断言。
+测试失败的原因是测试的模板类包含了一个默认的测试方法`XCTFail()`，一个强制判为失败的断言。
 
 ###编辑测试代码然后继续运行
 
-因为这是一个计算器应用的样板工程，你可以选择在最开始检查加法是否正确。因为测试编译到项目里面，不轮多么复杂，你都可以按照你的需求添加所有的上下文和其他所需信息来执行测试。
+因为这是一个计算器应用的样板工程，你可能要在最开始的时候检查它是否能正确执行加法。因为测试编译到app项目里面，不管多复杂，你都可以按照你的需求添加所有的上下文和其他所需信息来执行测试。
 
-插入下方的#import和实例变量声明到`SampleCalcTests.m`中     
+插入下方的#import和实例变量声明到`SampleCalcTests.m`文件中     
 
 
 
@@ -120,21 +120,21 @@ Xcode schemes 控制那些编译的内容。Schemes也可以控制可用的测�
 
 ![](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/art/twx-add_testing_05_2x.png)
 
-注意测试导航的列表的改变，反应了`testExample`已经被替换为`testAddition`。
+>**注意：**测试导航的列表的改变，反应了`testExample`已经被替换为`testAddition`。
 
-这里任然有错误，看下面的代码，第一部分成功，第二部分有问题。仔细观察，错误很显然:字符引用"11"多了1。改为“10”就能测试成功了。
+这里仍有错误，看下面的代码，第一部分成功，第二部分有问题。仔细观察，错误很明显:字符引用"11"多了1。改为“10”就能测试成功了。
 
 
 ![](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/art/twx-add_testing_06_2x.png)
 
 
 
-###相同的代码使用setUp() 和 tearDown()方法
+###相同的通用代码使用setUp() 和 tearDown()方法
 
-Xcode运行测试方法一次测试所有测试包中的测试类。在这个小例子里只有一个测试方法被实现了，这里需要访问三个计算器应用对象变量的功能。如果你写了4个货5个测试方法，你会发现你在每一次测试方法获得应用的对象状态中，重复了相同的代码。XCTest框架提供了实例方法`setUp` 和 `tearDown`,可用来把相同的代码放在调用前和在每次运行测试方法之后。
+Xcode运行测试方法一次测试所有测试包中的测试类。在这个小例子里只有一个测试方法被实现了，这里需要访问三个计算器应用对象变量的功能。如果在该类中写了4个或5个测试方法，你会发现你在每一次测试方法获得应用的对象状态中，重复了相同的代码。XCTest框架为测试类提供了实例方法`setUp` 和 `tearDown`,你可以用它在每个测试方法运行之前或者之后运行通用代码的调用。
 
 
-setUp和tearDown很简单。在`testAddition`资源里`Mac_Calc_Tests.m`，用//开头，分为四行获得应用变量给测试方法，然后粘贴到默认的`setUp`实例方法，由模板提供的方法。
+setUp和tearDown很简单。在`testAddition`资源里`Mac_Calc_Tests.m`，在第四行用// obtain the app variable for test access 开头，并将它们粘贴到模板提供的默认的`setUp`实例方法中。
 
     - (void)setUp
     {
@@ -147,7 +147,7 @@ setUp和tearDown很简单。在`testAddition`资源里`Mac_Calc_Tests.m`，用//
        calcView             = calcViewController.view;
     }
 
-现在第一个测试方法`testMultiplication`和其他的，都只有最小的重复次数。
+现在使用少的重复代码添加第二个测试方法：`testMultiplication`以及其他。
 
 ![](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/art/twx-add_testing_07_2x.png)
 
