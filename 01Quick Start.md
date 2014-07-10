@@ -11,13 +11,13 @@
 
 上面的测试导航展示了一个样板工程中的测试包、类和方法的分级表。这个工程是一个计算器应用。计算器引擎实现为一个框架包。你可以`SampleCalcTests`测试包的分级的顶部看到应用中的测试代码。
 
-         Note:Xcode的目标生成产品。Xcode的测试目标生成测试包并展示在测试导航栏中。
-    如果你的测试使用存储数据文件、图片，和其他的类型，则可以把它们添加到测试包中，并使用`NSBundle`的API在运行时访问。和测试类一同使用`+[NSBundle bundleForClass:]`来保证测试类从包中取得正确的数据。更多的信息可见[ NSBundle Class Reference](https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSBundle_Class/Reference/Reference.html#//apple_ref/doc/uid/TP40003624)。
+Note:Xcode的目标生成产品。Xcode的测试目标生成测试包并展示在测试导航栏中。
+如果你的测试使用存储数据文件、图片，和其他的类型，则可以把它们添加到测试包中，并使用`NSBundle`的API在运行时访问。和测试类一同使用`+[NSBundle bundleForClass:]`来保证测试类从包中取得正确的数据。更多的信息可见![ NSBundle Class Reference](https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSBundle_Class/Reference/Reference.html#//apple_ref/doc/uid/TP40003624).
 
-        Xcodeschemes 控制那些编译的内容。Schemes也可以控制可用的测试方法来执行测试操作。你可以在测试导航面板列表中通过Control+单击项目来启动或关闭测试包、类和方法，或者从快捷菜单中启用或者关闭测试，也可以在scheme中启用或者关闭测试。
+Xcode schemes 控制那些编译的内容。Schemes也可以控制可用的测试方法来执行测试操作。你可以在测试导航面板列表中通过Control+单击项目来启动或关闭测试包、类和方法，或者从快捷菜单中启用或者关闭测试，也可以在scheme中启用或者关闭测试。
         
         
-        
+     
 此视图中的激活的测试包是`SampleCalcTests`。`SampleCalcTests`包括了一个测试类，总共有9个测试方法。 当你按住表中任何一个项目的箭头，运行按钮![](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/art/twx-test_navigator_run_button_2x.png) 会展示了右边的项目名。这是比较快捷的方式运行包里所有的测试或者任何独立的测试。测试返回通过或失败结果给Xcode。当测试被执行，标识会更新从而向你展示结果，绿色的对勾标记是通过，红色的X为失败。在下面的测试导航面板中，两个测试被判定为失败。
 ![](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/art/twx-test_nav-indicators_2x.png)  
 
