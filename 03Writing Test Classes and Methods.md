@@ -115,35 +115,35 @@ Xcode执行测试可以明确这些方法的使用，这正是我们接下来的
 
 ##XCTest断言
 
-测试方法使用的断言呈现在Xcode的测试结果中，由XCTest框架提供。所有的断言有一个相似的格式:项目比较或逻辑表达式，一个失败结果格式的字符串，和插入到字符串中的参数。
+你的测试方法使用XCTest框架提供的断言来展示Xcode展示的测试结果。所有断言都有一个类似的形式：项目比较或逻辑表达式，一个失败结果字符串格式，和插入到字符串格式中的参数。
 
 
-    注意：所有断言的最后一个参数是`format...`，格式字符串和变量参数列表。XCTest提供了默认的失败结果字符串，可以将参数传递到断言里。`format`字符串提供了可选的额外的失败说明，那样就可以进一步的选择提供的描述。这个参数是可选的，所以可以完全忽略。
+>注意：所有断言的最后一个参数是`format...`，格式字符串和变量参数列表。XCTest为所有断言提供了默认的失败结果字符串，可使用参数传递到断言里。`format`字符串提供了可选的额外的失败自定义描述，就可以进一步选择提供的描述。这个参数是可选的，也可以完全被忽略。
     
     
 比如，[Quick Start](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/testing_1_quick_start/testing_1_quick_start.html#//apple_ref/doc/uid/TP40014132-CH2-SW1)里`testAddition`方法中的断言：
 
      XCTAssertEqualObjects([calcViewController.displayField stringValue], @"10", @"Part 2 failed.");
 
-阅读这段语句，是说：“指出一个错误，当字符串根据视图控制器展示区域创建，不同于参数值‘8’”。如果有失败断言，Xcode在测试导航发出失败信号，然后Xcode会在问题导航、资源编辑器和其他地方标出失败描述。下面是自愿编辑器中典型的断言结果：
+阅读这段简单明了的语句，是说：“Indicate a failure when a string created from the value of the controller’s display field is not the same as the reference string ‘8’” 。如果断言失败，那么Xcode在测试导航面板发出失败信号，然后Xcode会在issues导航面板、源码编辑器以及其他地方展示失败的描述。下面是源代码编辑器中典型的断言结果：
 
 ![](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/art/twx-test_failure_assert_result_2x.png)
 
-测试类可以包含多个断言，如果任何断言包括失败报告Xcode都发出的测试失败信号。
+测试类可以包含多个断言，如果任何断言包含失败报告，那么Xcode都发出的测试失败信号。
 
-断言分为五种类型：无条件失败，相等测试，为空测试，布尔测试，和异常测试。
+断言分为五种类型：无条件失败、等价测试、nil测试、Boolean测试以及异常测试。
 
 ##用类别区分断言
 
-下面的区域列出了XCTest断言。你可以使用`XCTestAssertions.h`来包含更多信息在XCTest断言里面。
+下面的区域列出了XCTest断言。你可以在Xcode中使用Quick Help查看`XCTestAssertions.h`来引用来获得更多关于XCTest断言的信息。。
 
-###非条件失败
-__XCTFail__.生成一个无条件的失败。
+###绝对失败
+__XCTFail__.生成一个绝对失败。
 
      XCTFail(format...)
 
 
-###相等测试
+###等价测试
 __XCTAssertEqualObjects__.当_expression1_不等于_expression2_将产生失败（或者一个对象为空，另一个不为空）。
 
      XCTAssertEqualObjects(expression1, expression2, format...)
@@ -162,17 +162,17 @@ __XCTAssertNotEqual__.  当_expression1_等于_expression2_将产生失败，这
      XCTAssertNotEqual(expression1, expression2, format...)
 
 
-__XCTAssertEqualWithAccuracy__. 当_expression1_不同于_expression2_的部分高于 _精度_ 将产生失败。这种标量用于floats和doubles这些有细微不同但能保证结果基本相等的地方，但是对所有的标量都有效。
+__XCTAssertEqualWithAccuracy__. 当_expression1_和_expression2_之间的差别高于 _accuracy_ 将产生失败。这种测试适用于floats和doubles这些标量，两者之间的细微不同导致它们不完全相等，但是对所有的标量都有效。
 
      XCTAssertEqualWithAccuracy(expression1, expression2, accuracy, format...)
 
-__XCTAssertNotEqualWithAccuracy__. 当_expression1_不同于_expression2_的部分低于 _精度_ 将产生失败。这种标量用于floats和doubles这些有细微不同但能保证结果基本相等的地方，但是对所有的标量都有效。
+__XCTAssertNotEqualWithAccuracy__. 当_expression1_和_expression2_之间的差别低于 _accuracy_ 将产生失败。这种测试适用于floats和doubles这些标量，两者之间的细微不同导致它们不完全相等，但是对所有的标量都有效。 
 
 
      XCTAssertNotEqualWithAccuracy(expression1, expression2, accuracy, format...)
 
 
-###nil(空)测试
+###Nil(空)测试
 
 __XCTAssertNil__.  当_expression_参数不为空产生错误。
 
