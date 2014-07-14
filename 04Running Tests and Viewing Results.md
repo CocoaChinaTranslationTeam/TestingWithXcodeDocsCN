@@ -1,4 +1,4 @@
-本章由migrant翻译[微博](http://weibo.com/u/2168385817)
+本章由CocoaChina翻译小组成员migrant翻译[微博](http://weibo.com/u/2168385817)
 
 #运行测试并查看结果#
 
