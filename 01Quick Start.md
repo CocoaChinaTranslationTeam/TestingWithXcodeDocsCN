@@ -1,3 +1,5 @@
+本章由CocoaChina翻译小组成员dada翻译 [github地址](https://github.com/sherlockdan)
+
 #快速开始
 
 本文的目的在于让测试成为你软件开发的重要组成部分，并使测试更方便并易于使用。
