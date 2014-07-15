@@ -75,7 +75,7 @@ Xcode执行测试可以明确这些方法的使用，这正是我们接下来的
 ##测试执行的流程
 在执行测试的过程中，XCTest找到所有继承于`XCTestCase`（它是测试类）的类，为每一个类运行它们的测试方法。
 
-对于每个类来说，测试开始于运行类setup方法。对于每个测试方法来说，一个新的类实例被创建，它的实例setup方法就会执行。在跑完了测试方法之后，实例卸载方法。类中这样连续重复执行所有测试方法。在运行的类卸载了最后的测试方法后，Xcode悔执行类卸载方法，并开始下一个类。这种序列一直重复直到跑完所有测试类的所有测试方法。
+对于每个类来说，测试开始于运行类setup方法。对于每个测试方法来说，一个新的类实例被创建，它的实例setup方法就会执行。在跑完了测试方法之后，实例卸载方法。类中这样连续重复执行所有测试方法。在运行的类卸载了最后的测试方法后，Xcode会执行类卸载方法，并开始下一个类。这种序列一直重复直到跑完所有测试类的所有测试方法。
 
 
 ##编写测试方法
@@ -145,30 +145,30 @@ __XCTFail__.生成一个绝对失败。
      XCTFail(format...)
 
 
-###等价测试
-__XCTAssertEqualObjects__.当_expression1_不等于_expression2_将产生失败（或者一个对象为空，另一个不为空）。
+###相等测试
+__XCTAssertEqualObjects__.当_expression1_不等于_expression2_时报错（或者一个对象为空，另一个不为空）。
 
      XCTAssertEqualObjects(expression1, expression2, format...)
 
-__XCTAssertNotEqualObjects__. 当_expression1_等于_expression2_将产生失败
+__XCTAssertNotEqualObjects__. 当_expression1_等于_expression2_时报错
 
      XCTAssertNotEqualObjects(expression1, expression2, format...)
 
 
-__XCTAssertEqual__. 当_expression1_不等于_expression2_将产生失败，这个测试用于C语言的标量。
+__XCTAssertEqual__. 当_expression1_不等于_expression2_时报错，这个测试用于C语言的标量。
 
      XCTAssertEqual(expression1, expression2, format...)
 
-__XCTAssertNotEqual__.  当_expression1_等于_expression2_将产生失败，这个测试用于C语言的标量。
+__XCTAssertNotEqual__.  当_expression1_等于_expression2_时报错，这个测试用于C语言的标量。
 
      XCTAssertNotEqual(expression1, expression2, format...)
 
 
-__XCTAssertEqualWithAccuracy__. 当_expression1_和_expression2_之间的差别高于 _accuracy_ 将产生失败。这种测试适用于floats和doubles这些标量，两者之间的细微不同导致它们不完全相等，但是对所有的标量都有效。
+__XCTAssertEqualWithAccuracy__. 当_expression1_和_expression2_之间的差别高于 _accuracy_时报错。这种测试适用于floats和doubles这些标量，两者之间的细微差异导致它们不完全相等，但是对所有的标量都有效。
 
      XCTAssertEqualWithAccuracy(expression1, expression2, accuracy, format...)
 
-__XCTAssertNotEqualWithAccuracy__. 当_expression1_和_expression2_之间的差别低于 _accuracy_ 将产生失败。这种测试适用于floats和doubles这些标量，两者之间的细微不同导致它们不完全相等，但是对所有的标量都有效。 
+__XCTAssertNotEqualWithAccuracy__. 当_expression1_和_expression2_之间的差别低于 _accuracy_ 时报错。这种测试适用于floats和doubles这些标量，两者之间的细微差异导致它们不完全相等，但是对所有的标量都有效。 
 
 
      XCTAssertNotEqualWithAccuracy(expression1, expression2, accuracy, format...)
@@ -176,11 +176,11 @@ __XCTAssertNotEqualWithAccuracy__. 当_expression1_和_expression2_之间的差�
 
 ###Nil(空)测试
 
-__XCTAssertNil__.  当_expression_参数不为空产生错误。
+__XCTAssertNil__.  当_expression_参数非nil时报错。
 
     XCTAssertNil(expression, format...)
 
-__XCTAssertNotNil__. 当_expression_参数不为空产生错误。
+__XCTAssertNotNil__. 当_expression_参数为nil时报错。
 
     XCTAssertNotNil(expression, format...)
     
@@ -188,46 +188,46 @@ __XCTAssertNotNil__. 当_expression_参数不为空产生错误。
 ###布尔测试
 
 
-__XCTAssertTrue__. 当_expression_计算为_false_产生错误。
+__XCTAssertTrue__. 当_expression_计算结果为_false_时报错。
 
     XCTAssertTrue(expression, format...)
 
-__XCTAssert__. 当_expression_计算为_false_产生错误，与_XCTAssertTrue_相同。
+__XCTAssert__. 当_expression_计算结果为_false_时报错，与_XCTAssertTrue_同义。
 
      XCTAssert(expression, format...)
      
 
-__XCTAssertFalse__.  当_expression_计算为_true_产生错误。
+__XCTAssertFalse__.  当_expression_计算结果为_true_时报错。
 
      XCTAssertFalse(expression, format...)
 
 
 ###异常测试
 
-__XCTAssertThrows__.当_expression_不抛出异常产生错误。
+__XCTAssertThrows__.当_expression_不抛出异常时报错误。
 
      XCTAssertThrows(expression, format...)
      
-__XCTAssertThrowsSpecific__.当指定的类的_expression_不抛出异常产生错误。
+__XCTAssertThrowsSpecific__.当_expression_针对指定类不抛出异常时报错。
 
      XCTAssertThrowsSpecific(expression, exception_class, format...)
 
-__XCTAssertThrowsSpecificNamed__. 当_expression_指定的类中指定的名字不抛出异常产生错误。对于AppKit框架或基础框架非常有用，可以用通用的`NSException`抛出指定名字的异常(NSInvalidArgumentException 等)。
+__XCTAssertThrowsSpecificNamed__.当_expression_针对特定类和特定名字不抛出异常时报错。对于AppKit框架或Foundation框架非常有用，抛出带有特定名字的NSException(NSInvalidArgumentException等等)。
 
     XCTAssertThrowsSpecificNamed(expression, exception_class, exception_name, format...)
 
 
-__XCTAssertNoThrow__. 当_expression_抛出异常产生错误。
+__XCTAssertNoThrow__. 当_expression_抛出异常时报错。
 
      XCTAssertNoThrow(expression, format...)
 
 
-__XCTAssertNoThrowSpecific__. 当指定的类的_expression_抛出异常则产生错误。任意其他的异常都可以；就说，他不产生失败。
+__XCTAssertNoThrowSpecific__. 当_expression_针对指定类抛出异常时报错。任意其他异常都可以；也就是说它不会报错。
 
     XCTAssertNoThrowSpecific(expression, exception_class, format...)
 
 
-__XCTAssertNoThrowSpecificNamed__. 当_expression_指定的类中指定的名字抛出异常则产生错误。对于AppKit框架或基础框架非常有用，可以用通用的`NSException`抛出指定名字的异常(NSInvalidArgumentException 等)。
+__XCTAssertNoThrowSpecificNamed__.当_expression_针对特定类和特定名字抛出异常时报错。对于AppKit框架或Foundation框架非常有用，抛出带有特定名字的NSException(NSInvalidArgumentException等等)。
 
 
      XCTAssertNoThrowSpecificNamed(expression, exception_class, exception_name, format...)
