@@ -64,7 +64,7 @@ XCTest 框架有几种不同的方式在 Xcode 中展示测试结果。下面的
 4.调试控制台以文本形式展示了测试运行的综合信息。这些信息和日志导航面板中显示的信息一样,但如果你已经处于 debug 状态,那么 debug 的 输出也会出现在这里。
 ![](https://developer.apple.com/library/ios/documentation/DeveloperTools/Conceptual/testing_with_xcode/art/twx-results-dbgconsole_2x.png)
 
-#使用Schemes（方案）和Test Target（测试目标）
+#使用Schemes(方案)和Test Target(测试目标)#
 
 Xcode Scheme控制着构建、运行、测试和调试这些菜单命令的行为。当创建TestTarget并使用测试导航面板执行其他测试系统操作时,Xcode 5 为我们管理Scheme配置-- 例如,当你开启或关闭一个测试方法、测试类或测试束时。使用 Xcode Server 和持续集成需要通过设置 Manage Schemes页面中的复选框来将一个Scheme设置成共享,并将其连同你的工程和源代码导出到一个源文件仓库。
 
