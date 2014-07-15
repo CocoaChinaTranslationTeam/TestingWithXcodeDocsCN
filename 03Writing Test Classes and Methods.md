@@ -85,7 +85,7 @@ Xcode 执行测试可以明确这些方法的使用，这正是我们接下来�
 
 为了使测试方法能够正常访问被测试代码，引入正确的头文件到测试类中很重要。
 
-当 Xcode 运行测试时，它调用的每个测试方法都是独立的。因此每个方法需要准备和清理辅助变量、结构以及与主题API进行交互的对象等。如果类中所有测试方法的代码是相同的，你可以直接把它添加到必需的`setUp`和`tearDown`的实例方法中，详见[“Test Class Structure.”](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/testing_3_writing_test_classes/testing_3_writing_test_classes.html#//apple_ref/doc/uid/TP40014132-CH4-SW2)
+当 Xcode 运行测试时，它调用的每个测试方法都是独立的。因此每个方法需要准备和清理辅助变量、结构以及与主题API进行交互的对象等。如果类中所有测试方法的代码是相同的，你可以直接把它添加到必需的`setUp`和`tearDown`的实例方法中，详见[“Test Class Structure”](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/testing_3_writing_test_classes/testing_3_writing_test_classes.html#//apple_ref/doc/uid/TP40014132-CH4-SW2)。
 
 下面是个测试方法的模型:
 
@@ -138,7 +138,7 @@ XCTAssertEqualObjects([calcViewController.displayField stringValue], @"10", @"Pa
 
 ##用类别区分断言
 
-下面的区域列出了 XCTest 断言。你可以在 Xcode 中使用 Quick Help 查看`XCTestAssertions.h`来引用来获得更多关于 XCTest 断言的信息。。
+下面的区域列出了 XCTest 断言。你可以在 Xcode 中使用 Quick Help 查看`XCTestAssertions.h`来引用来获得更多关于 XCTest 断言的信息。
 
 ###无条件失败
 __XCTFail__。生成一个无条件失败
