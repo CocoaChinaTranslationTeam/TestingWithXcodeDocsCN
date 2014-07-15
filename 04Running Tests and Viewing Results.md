@@ -2,7 +2,7 @@
 
 #运行测试并查看结果#
 
-正如在 [“Quick Start()”] (https://developer.apple.com/library/ios/documentation/DeveloperTools/Conceptual/testing_with_xcode/testing_1_quick_start/testing_1_quick_start.html#//apple_ref/doc/uid/TP40014132-CH2-SW1)看到的那样,使用 Xcode 测试导航面板,可以很容易的运行测试并查看其结果。有另外几种运行测试的交互方法。Xcode运行测试取决于一个scheme中包括并开启了哪些test target。测试导航面板让你无需使用scheme编辑器就能直接控制那些被包含、被开启或被关闭的test target、类以及方法。
+正如在 [“Quick Start”] (https://developer.apple.com/library/ios/documentation/DeveloperTools/Conceptual/testing_with_xcode/testing_1_quick_start/testing_1_quick_start.html#//apple_ref/doc/uid/TP40014132-CH2-SW1)看到的那样,使用 Xcode 测试导航面板,可以很容易的运行测试并查看其结果。有另外几种运行测试的交互方法。Xcode运行测试取决于一个scheme中包括并开启了哪些test target。测试导航面板让你无需使用scheme编辑器就能直接控制那些被包含、被开启或被关闭的test target、类以及方法。
 
 # 运行测试命令 #
 
